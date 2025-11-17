@@ -76,13 +76,22 @@ int main(void)
     productoEscalar32(vec, vecOut1, lon, esc);
     asm_productoEscalar32(vec, vecOut2, lon, esc);
 
-    /* ----------- Ejercicio 1 ----------- */
+    /* ----------- Ejercicio 2 ----------- */
+    uint16_t vec12[] = {100, 2000, 30, 400, 5000};
+    uint32_t lon12 = sizeof(vec12)/sizeof(vec12[0]);
+    uint16_t vecOut12_1[lon12], vecOut12_2[lon12];
+    productoEscalar12(vec12, vecOut12_1, lon12, esc);
+    asm_productoEscalar12(vec12, vecOut12_2, lon12, esc);
 
     /* ----------- Ejercicio 3 ----------- */
-    uint32_t a = 1023;
+    uint32_t a = 1023; // 0000 0011 1111 1111
     uint32_t b = bitfield_clear(a, 5, 3);
     uint32_t c = asm_bitfield_clear(a, 5, 3);
-    /* ----------- Ejercicio 3 ----------- */
+
+    /* ----------- Ejercicio 4 ----------- */
+    uint32_t dato = 947; // 0000 0011 1011 0011
+    uint32_t d = bitfield_toggle(dato, 6, 2);
+    uint32_t e = asm_bitfield_toggle(dato, 6, 2);
 
   /* USER CODE END 1 */
 

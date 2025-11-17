@@ -27,7 +27,8 @@
         "dev_gpio_cfg.h": "c",
         "dev_uart.h": "c",
         "stm32f4xx_hal_conf.h": "c",
-        "lcd_port.h": "c"
+        "lcd_port.h": "c",
+        "functions.h": "c"
     },
     "cortex-debug.gdbPath": "${env:GDB}"
 }
