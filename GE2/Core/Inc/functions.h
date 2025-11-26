@@ -6,29 +6,29 @@
 
 /* ---------- Funciones en C --------- */
 /* Ejercicio 1 */
-void productoEscalar32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t longitud, uint16_t escalar);
+void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud);
 
 /* Ejercicio 2 */
-void productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t longitud, uint16_t escalar);
+uint32_t max (int32_t * vectorIn, uint32_t longitud);
 
 /* Ejercicio 3 */
-uint32_t bitfield_clear(uint32_t dato, uint32_t ancho, uint32_t inicio);
+void downSample (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N);
 
 /* Ejercicio 4 */
-uint32_t bitfield_toggle (uint32_t dato, uint32_t ancho, uint32_t inicio);
+void invertir (uint16_t * vector, uint32_t longitud);
 
 
 /* ---------- Funciones en Assembly --------- */
 /* Ejercicio 1 */
-void asm_productoEscalar32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t longitud, uint16_t escalar);
+void asm_pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud);
 
 /* Ejercicio 2 */
-void asm_productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t longitud, uint16_t escalar);
+uint32_t asm_max (int32_t * vectorIn, uint32_t longitud);
 
 /* Ejercicio 3 */
-uint32_t asm_bitfield_clear(uint32_t dato, uint32_t ancho, uint32_t inicio);
+void asm_downSample (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N);
 
 /* Ejercicio 4 */
-uint32_t asm_bitfield_toggle (uint32_t dato, uint32_t ancho, uint32_t inicio);
+void asm_invertir (uint16_t * vector, uint32_t longitud);
 
 #endif /* INC_FUNCTIONS_H_ */
