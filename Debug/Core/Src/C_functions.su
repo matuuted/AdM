@@ -1,0 +1,4 @@
+../Core/Src/C_functions.c:6:6:productoEscalar32	32	static
+../Core/Src/C_functions.c:14:6:productoEscalar12	32	static
+../Core/Src/C_functions.c:25:10:bitfield_clear	32	static
+../Core/Src/C_functions.c:35:10:bitfield_toggle	32	static

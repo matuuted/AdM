@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include <stdio.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "functions.h"
@@ -69,29 +69,34 @@ int main(void)
  /* USER CODE BEGIN 1 */
 
     /* ----------- Ejercicio 1 ----------- */
-    uint16_t esc = 6;
-    uint32_t vec[] = {1, 2, 3, 4, 5};
-    uint32_t lon = sizeof(vec)/sizeof(vec[0]);
-    uint32_t vecOut1[lon], vecOut2[lon];
-    productoEscalar32(vec, vecOut1, lon, esc);
-    asm_productoEscalar32(vec, vecOut2, lon, esc);
+    int32_t vectorIn_1[] = {100000, -150000, 250000, -300000, 500000};
+    uint32_t lon = sizeof(vectorIn_1)/sizeof(vectorIn_1[0]);
+    int16_t vecOut1[lon];
+    pack32to16(vectorIn_1, vecOut1, lon);
+    // asm_pack32to16(vectorIn_1, vecOut1, lon);
 
     /* ----------- Ejercicio 2 ----------- */
-    uint16_t vec12[] = {100, 2000, 30, 400, 5000};
-    uint32_t lon12 = sizeof(vec12)/sizeof(vec12[0]);
-    uint16_t vecOut12_1[lon12], vecOut12_2[lon12];
-    productoEscalar12(vec12, vecOut12_1, lon12, esc);
-    asm_productoEscalar12(vec12, vecOut12_2, lon12, esc);
+    int32_t vectorIn_2[] = { -3, 5, 12, 7, 2 };
+    uint32_t index_2 = 0;
+    uint32_t lon_2 = sizeof(vectorIn_2)/sizeof(vectorIn_2[0]);
+    index_2 = max(vectorIn_2, lon_2);
+    // index_2 = asm_max(vectorIn_2, lon_2);
+    printf("El índice del máximo es: %lu\n", (unsigned long)index_2);
 
     /* ----------- Ejercicio 3 ----------- */
-    uint32_t a = 1023; // 0000 0011 1111 1111
-    uint32_t b = bitfield_clear(a, 5, 3);
-    uint32_t c = asm_bitfield_clear(a, 5, 3);
+    int32_t vectorIn_3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    int32_t lon_3 = sizeof(vectorIn_3)/sizeof(vectorIn_3[0]);
+    uint32_t N = 3;
+    uint32_t lonOut_3 = lon_3 - (lon_3 / N);
+    int32_t vectorOut[lonOut_3];
+    downSample(vectorIn_3, vectorOut, lon_3, N);
+    // asm_downSample(vectorIn_3, vectorOut, lon_3, N);
 
     /* ----------- Ejercicio 4 ----------- */
-    uint32_t dato = 947; // 0000 0011 1011 0011
-    uint32_t d = bitfield_toggle(dato, 6, 2);
-    uint32_t e = asm_bitfield_toggle(dato, 6, 2);
+    uint16_t vec[] = {1, 2, 3, 4, 5, 6};
+    uint32_t lon_4 = sizeof(vec)/sizeof(vec[0]);
+    invertir(vec, lon_4);
+    // asm_invertir(vec, lon_4);
 
   /* USER CODE END 1 */
 
