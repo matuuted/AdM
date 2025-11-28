@@ -73,14 +73,14 @@ int main(void)
     uint32_t lon = sizeof(vectorIn_1)/sizeof(vectorIn_1[0]);
     int16_t vecOut1[lon];
     pack32to16(vectorIn_1, vecOut1, lon);
-    // asm_pack32to16(vectorIn_1, vecOut1, lon);
+    asm_pack32to16(vectorIn_1, vecOut1, lon);
 
     /* ----------- Ejercicio 2 ----------- */
     int32_t vectorIn_2[] = { -3, 5, 12, 7, 2 };
     uint32_t index_2 = 0;
     uint32_t lon_2 = sizeof(vectorIn_2)/sizeof(vectorIn_2[0]);
     index_2 = max(vectorIn_2, lon_2);
-    // index_2 = asm_max(vectorIn_2, lon_2);
+    index_2 = asm_max(vectorIn_2, lon_2);
     printf("El índice del máximo es: %lu\n", (unsigned long)index_2);
 
     /* ----------- Ejercicio 3 ----------- */
@@ -90,13 +90,13 @@ int main(void)
     uint32_t lonOut_3 = lon_3 - (lon_3 / N);
     int32_t vectorOut[lonOut_3];
     downSample(vectorIn_3, vectorOut, lon_3, N);
-    // asm_downSample(vectorIn_3, vectorOut, lon_3, N);
+    asm_downSample(vectorIn_3, vectorOut, lon_3, N);
 
     /* ----------- Ejercicio 4 ----------- */
     uint16_t vec[] = {1, 2, 3, 4, 5, 6};
     uint32_t lon_4 = sizeof(vec)/sizeof(vec[0]);
     invertir(vec, lon_4);
-    // asm_invertir(vec, lon_4);
+    asm_invertir(vec, lon_4);
 
   /* USER CODE END 1 */
 

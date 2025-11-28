@@ -28,18 +28,16 @@ uint32_t max (int32_t * vectorIn, uint32_t longitud){
 void downSample (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N){
     uint32_t indice = 0;
     for (uint32_t i = 0; i < longitud; i ++){
-        if (((i + 1) % N) == 0){
-           continue;
-        } else{
-            vectorOut[indice] = vectorIn[i];
-            indice++;
-        }
+        if (((i + 1) % N) == 0) continue;
+
+		vectorOut[indice] = vectorIn[i];
+		indice++;
     }
 }
 /* Ejercicio 4 */
 void invertir (uint16_t * vector, uint32_t longitud){
     uint16_t aux;
-    for (uint32_t i = longitud - 1; i > longitud / 2; i--) {
+    for (uint32_t i = longitud - 1; i >= longitud / 2; i--) {
         
         uint32_t j = longitud - 1 - i; // Índice correspondiente desde el inicio
 
