@@ -1,0 +1,4 @@
+../Core/Src/C_functions.c:6:6:pack32to16	2
+../Core/Src/C_functions.c:13:10:max	3
+../Core/Src/C_functions.c:28:6:downSample	3
+../Core/Src/C_functions.c:40:6:invertir	2
