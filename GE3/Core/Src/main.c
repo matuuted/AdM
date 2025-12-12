@@ -69,34 +69,74 @@ int main(void)
  /* USER CODE BEGIN 1 */
 
     /* ----------- Ejercicio 1 ----------- */
-    int32_t vectorIn_1[] = {100000, -150000, 250000, -300000, 500000};
-    uint32_t lon = sizeof(vectorIn_1)/sizeof(vectorIn_1[0]);
-    int16_t vecOut1[lon];
-    pack32to16(vectorIn_1, vecOut1, lon);
-    asm_pack32to16(vectorIn_1, vecOut1, lon);
+    int16_t vecPot[] = {10, -10, 20, -20}; // Cuadrados: 100, 100, 400, 400 = 1000
+    DWT->CTRL |= 1 << DWT_CTRL_CYCCNTENA_Pos;
+    uint32_t ciclos_C, ciclos_ASM, ciclos_DSP;
+
+    uint32_t lenPot = 4;
+    // Resultado esperado: 1000 / 4 = 250
+    DWT->CYCCNT = 0;
+    uint32_t resPot = potencia(vecPot, lenPot);
+    ciclos_C = DWT->CYCCNT;
+
+    DWT->CYCCNT = 0;
+    uint32_t resPot2 = asm_potencia(vecPot, lenPot);
+    ciclos_ASM = DWT->CYCCNT;
+
+    DWT->CYCCNT = 0;
+    uint32_t resPot3 = asm_potencia_DSP(vecPot, lenPot);
+    ciclos_DSP = DWT->CYCCNT;
 
     /* ----------- Ejercicio 2 ----------- */
-    int32_t vectorIn_2[] = { -3, 5, 12, 7, 2 };
-    uint32_t index_2 = 0;
-    uint32_t lon_2 = sizeof(vectorIn_2)/sizeof(vectorIn_2[0]);
-    index_2 = max(vectorIn_2, lon_2);
-    index_2 = asm_max(vectorIn_2, lon_2);
-    printf("El índice del máximo es: %lu\n", (unsigned long)index_2);
+    int8_t vecX[] = {10,  20, -50, 100, 1, 2, 3, 4, 5, 6, 7, 8};
+    int8_t vecY[] = { 4,  30, -10, 100, 8, 7, 6, 5, 4, 3, 2, 1};
+    int8_t vecE[12], vecE_asm[12], vecE_dsp[12];
+    
+    /* Cálculos esperados:
+       i=0: (10 - 4)/2  = 6/2  = 3
+       i=1: (20 - 30)/2 = -10/2 = -5
+       i=2: (-50 - (-10))/2 = -40/2 = -20
+       i=3: (100 - 100)/2 = 0
+        i=4: (1 - 8)/2 = -7/2 = -4
+        i=5: (2 - 7)/2 = -5/2 = -3
+        i=6: (3 - 6)/2 = -3/2 = -2
+        i=7: (4 - 5)/2 = -1/2 = -1
+        i=8: (5 - 4)/2 = 1/2 = 0
+        i=9: (6 - 3)/2 = 3/2 = 1
+        i=10: (7 - 2)/2 = 5/2 = 2
+        i=11: (8 - 1)/2 = 7/2 = 3
+    */
+    DWT->CYCCNT = 0;
+    medDif(vecE, vecX, vecY, 12);
+    ciclos_C = DWT->CYCCNT;
 
-    /* ----------- Ejercicio 3 ----------- */
-    int32_t vectorIn_3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-    int32_t lon_3 = sizeof(vectorIn_3)/sizeof(vectorIn_3[0]);
-    uint32_t N = 3;
-    uint32_t lonOut_3 = lon_3 - (lon_3 / N);
-    int32_t vectorOut[lonOut_3];
-    downSample(vectorIn_3, vectorOut, lon_3, N);
-    asm_downSample(vectorIn_3, vectorOut, lon_3, N);
+    DWT->CYCCNT = 0;
+    asm_medDif(vecE_asm, vecX, vecY, 12);
+    ciclos_ASM = DWT->CYCCNT;
 
-    /* ----------- Ejercicio 4 ----------- */
-    uint16_t vec[] = {1, 2, 3, 4, 5, 6};
-    uint32_t lon_4 = sizeof(vec)/sizeof(vec[0]);
-    invertir(vec, lon_4);
-    asm_invertir(vec, lon_4);
+    DWT->CYCCNT = 0;
+    asm_medDif_DSP(vecE_dsp, vecX, vecY, 12);
+    ciclos_DSP = DWT->CYCCNT;
+
+    // /* ----------- Ejercicio 3 ----------- */
+    int16_t audioIn[]  = {10, 20, 25, 20, 100, 110, 115, 90}; 
+    int16_t audioOut[8], audioOutASM[8], audioOutDSP[8];
+    uint32_t lenEco = 8;
+
+
+    DWT->CYCCNT = 0;
+    eco(audioIn, audioOut, lenEco);
+    ciclos_C = DWT->CYCCNT;
+
+    DWT->CYCCNT = 0;
+    asm_eco(audioIn, audioOutASM, lenEco);
+    ciclos_ASM = DWT->CYCCNT;
+
+    DWT->CYCCNT = 0;
+    asm_eco_DSP(audioIn, audioOutDSP, lenEco);
+    // asm_eco_DSP2(audioIn, audioOutDSP, lenEco);
+    ciclos_DSP = DWT->CYCCNT;
+    
 
   /* USER CODE END 1 */
 
